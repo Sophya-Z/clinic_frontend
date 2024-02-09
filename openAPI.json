@@ -1,0 +1,837 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/users": {
+            "post": {
+                "operationId": "UsersController_create",
+                "summary": "Создание пользователя",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Подьзователь"
+                ]
+            },
+            "get": {
+                "operationId": "UsersController_getAll",
+                "summary": "Получение всех пользователей",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Подьзователь"
+                ]
+            }
+        },
+        "/doctors": {
+            "post": {
+                "operationId": "DoctorsController_create",
+                "summary": "Создание доктора",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDoctorDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Doctor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Доктор"
+                ]
+            },
+            "get": {
+                "operationId": "DoctorsController_getAll",
+                "summary": "Просмотр всех докторов",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Doctor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Доктор"
+                ]
+            }
+        },
+        "/doctors/add-time-slots": {
+            "post": {
+                "operationId": "DoctorsController_addTimeSlots",
+                "summary": "Добавление тайм слотов",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddTimeSlotsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Doctor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Доктор"
+                ]
+            }
+        },
+        "/doctors/get-avaliable-dates": {
+            "post": {
+                "operationId": "DoctorsController_getAvailableDates",
+                "summary": "Получение доступных дат для записи",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetAvaliableDatesDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Doctor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Доктор"
+                ]
+            }
+        },
+        "/appointments": {
+            "post": {
+                "operationId": "AppointmentsController_create",
+                "summary": "Создание записи на приём",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAppointmentDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointment"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Записи на приём"
+                ]
+            },
+            "get": {
+                "operationId": "AppointmentsController_getAll",
+                "summary": "Получение всех записей",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointment"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Записи на приём"
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "operationId": "AuthController_signIn",
+                "summary": "Вход в учётную запись",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignInDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Аутентификация"
+                ]
+            }
+        },
+        "/auth/profile": {
+            "get": {
+                "operationId": "AuthController_getProfile",
+                "summary": "Подтверждение учётной записи",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Аутентификация"
+                ]
+            }
+        },
+        "/admins": {
+            "post": {
+                "operationId": "AdminsController_create",
+                "summary": "Создание админа",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdminDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Admin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Администратор"
+                ]
+            },
+            "get": {
+                "operationId": "AdminsController_getAll",
+                "summary": "Просмотр админов",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Администратор"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Клиника",
+        "description": "Документация REST API",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "App",
+            "description": ""
+        }
+    ],
+    "servers": [
+        {
+            "url": "http://localhost:7000"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "CreateUserDto": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string",
+                        "example": "Захарчук",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Софья",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Игоревна",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "12.12.2001",
+                        "description": "Дата рождения"
+                    },
+                    "passportSeries": {
+                        "type": "number",
+                        "example": "1234",
+                        "description": "Серия паспорта"
+                    },
+                    "passportNumber": {
+                        "type": "number",
+                        "example": "567890",
+                        "description": "Номер паспорта"
+                    },
+                    "passportBeenUsed": {
+                        "type": "string",
+                        "example": "Отделом УФМС Росси по Саратовской области",
+                        "description": "Паспорт выдан"
+                    },
+                    "departmentCode": {
+                        "type": "number",
+                        "example": "123",
+                        "description": "Код организации"
+                    },
+                    "dateIssue": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "10.10.2020",
+                        "description": "Дата выдачи"
+                    },
+                    "snils": {
+                        "type": "string",
+                        "example": "123-456-789 12",
+                        "description": "СНИЛС"
+                    },
+                    "inn": {
+                        "type": "number",
+                        "example": "123456789012",
+                        "description": "ИНН"
+                    },
+                    "residentialAddress": {
+                        "type": "string",
+                        "example": "г. Энгельс, ул. Колотилова, д. 155, кв. 82",
+                        "description": "Адрес проживания"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "example": "8(912)345-67-89",
+                        "description": "Номер телефона"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "sofa_z@mail.ru",
+                        "description": "Адрес электронной почты"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "qwe1234",
+                        "description": "Пароль"
+                    }
+                },
+                "required": [
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "passportSeries",
+                    "passportNumber",
+                    "passportBeenUsed",
+                    "departmentCode",
+                    "dateIssue",
+                    "snils",
+                    "inn",
+                    "residentialAddress",
+                    "phoneNumber",
+                    "email",
+                    "password"
+                ]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "id"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "example": "Захарчук",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Софья",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Игоревна",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "12.12.2001",
+                        "description": "Дата рождения"
+                    },
+                    "passportSeries": {
+                        "type": "number",
+                        "example": "1234",
+                        "description": "Серия паспорта"
+                    },
+                    "passportNumber": {
+                        "type": "number",
+                        "example": "456789",
+                        "description": "Номер паспорта"
+                    },
+                    "passportBeenUsed": {
+                        "type": "string",
+                        "example": "Отделом УФМС Росси по Саратовской области",
+                        "description": "Паспорт выдан"
+                    },
+                    "departmentCode": {
+                        "type": "number",
+                        "example": "123",
+                        "description": "Код организации"
+                    },
+                    "dateIssue": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "10.10.2020",
+                        "description": "Дата выдачи"
+                    },
+                    "snils": {
+                        "type": "string",
+                        "example": "123-456-789 12",
+                        "description": "СНИЛС"
+                    },
+                    "inn": {
+                        "type": "number",
+                        "example": "12345679012",
+                        "description": "ИНН"
+                    },
+                    "residentialAddress": {
+                        "type": "string",
+                        "example": "г. Энгельс, ул. Колотилова, д. 155, кв. 82",
+                        "description": "Адрес проживания"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "example": "8(912)345-67-89",
+                        "description": "Номер телефона"
+                    }
+                },
+                "required": [
+                    "id",
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "passportSeries",
+                    "passportNumber",
+                    "passportBeenUsed",
+                    "departmentCode",
+                    "dateIssue",
+                    "snils",
+                    "inn",
+                    "residentialAddress",
+                    "phoneNumber"
+                ]
+            },
+            "CreateDoctorDto": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string",
+                        "example": "Иванов",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иван",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Иванович",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "09.02.1990",
+                        "description": "Дата рождения"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Врач-офтальмолог",
+                        "description": "Описание"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "example": "8(908)765-54-32",
+                        "description": "Номер телефона"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "doctor@mail.ru",
+                        "description": "Адрес электронной почты"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "09021990",
+                        "description": "Пароль"
+                    }
+                },
+                "required": [
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "description",
+                    "phoneNumber",
+                    "email",
+                    "password"
+                ]
+            },
+            "Doctor": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "id"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "example": "Иванов",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иван",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Иванович",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "09.02.1990",
+                        "description": "Дата рождения"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Врач-офтальмолог",
+                        "description": "Описание"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "8(908)765-54-32",
+                        "description": "Номер телефона"
+                    },
+                    "timeSlots": {
+                        "example": [],
+                        "description": "График",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "description",
+                    "phone",
+                    "timeSlots"
+                ]
+            },
+            "AddTimeSlotsDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Доктор ID"
+                    },
+                    "timeSlots": {
+                        "example": 1,
+                        "description": "Доктор ID",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "timeSlots"
+                ]
+            },
+            "GetAvaliableDatesDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Доктор ID"
+                    },
+                    "startDate": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": 1,
+                        "description": "Доктор ID"
+                    },
+                    "endDate": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": 1,
+                        "description": "Доктор ID"
+                    }
+                },
+                "required": [
+                    "id",
+                    "startDate",
+                    "endDate"
+                ]
+            },
+            "CreateAppointmentDto": {
+                "type": "object",
+                "properties": {}
+            },
+            "Appointment": {
+                "type": "object",
+                "properties": {}
+            },
+            "SignInDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "doctor@mail.ru",
+                        "description": "Адрес электронной почты"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "09021990",
+                        "description": "Пароль"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            },
+            "CreateAdminDto": {
+                "type": "object",
+                "properties": {
+                    "surname": {
+                        "type": "string",
+                        "example": "Иванов",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иван",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Иванович",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "09.02.1990",
+                        "description": "Дата рождения"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "example": "8(908)765-54-32",
+                        "description": "Номер телефона"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "doctor@mail.ru",
+                        "description": "Адрес электронной почты"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "09021990",
+                        "description": "Пароль"
+                    }
+                },
+                "required": [
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "phoneNumber",
+                    "email",
+                    "password"
+                ]
+            },
+            "Admin": {
+                "type": "object",
+                "properties": {
+                    "id_admin": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "id"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "example": "Иванов",
+                        "description": "Фамилия"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иван",
+                        "description": "Имя"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Иванович",
+                        "description": "Отчество"
+                    },
+                    "birthday": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "09.02.1990",
+                        "description": "Дата рождения"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "8(908)765-54-32",
+                        "description": "Номер телефона"
+                    }
+                },
+                "required": [
+                    "id_admin",
+                    "surname",
+                    "name",
+                    "patronymic",
+                    "birthday",
+                    "phone_number"
+                ]
+            }
+        }
+    }
+}
