@@ -317,7 +317,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "$ref": "#/components/schemas/Account"
                                 }
                             }
                         }
@@ -734,7 +734,28 @@
             },
             "CreateAppointmentDto": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "example": "2020-10-10",
+                        "description": "Дата посещения"
+                    },
+                    "doctorId": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "Доктор Id"
+                    },
+                    "userId": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "Пользователь Id"
+                    }
+                },
+                "required": [
+                    "date",
+                    "doctorId",
+                    "userId"
+                ]
             },
             "Appointment": {
                 "type": "object",
@@ -757,6 +778,40 @@
                 "required": [
                     "email",
                     "password"
+                ]
+            },
+            "Account": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "id"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "sofa_z@mail.ru",
+                        "description": "Адрес электронной почты"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "qwe1234",
+                        "description": "Пароль"
+                    },
+                    "role": {
+                        "example": "admin",
+                        "description": "Роль пользователя",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "email",
+                    "password",
+                    "role"
                 ]
             },
             "CreateAdminDto": {

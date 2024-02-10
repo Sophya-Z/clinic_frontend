@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { Form, Input, Button, Card, Flex, Radio, notification } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { useAppointmentsControllerCreateMutation, useAuthControllerSignInMutation, useDoctorsControllerGetAllQuery, useDoctorsControllerGetAvailableDatesQuery, useDoctorsControllerGetByIdQuery } from "../redux/doctorApi";
+import { useAppointmentsControllerCreateMutation, useAuthControllerGetProfileQuery, useAuthControllerSignInMutation, useDoctorsControllerGetAllQuery, useDoctorsControllerGetAvailableDatesQuery, useDoctorsControllerGetByIdQuery } from "../redux/doctorApi";
 import { LeftOutlined, LikeOutlined, MessageOutlined, RightOutlined, StarOutlined } from '@ant-design/icons';
 import moment from "moment";
 import 'moment/locale/ru';
@@ -43,6 +43,10 @@ const Appointment = () => {
         result,
     ] = useAppointmentsControllerCreateMutation()
 
+    const {
+        data: account
+    } = useAuthControllerGetProfileQuery()
+
 
     if (isLoading) return <div>Loading...</div>
     if (!doctor) return <div>Missing post!</div>
@@ -74,7 +78,8 @@ const Appointment = () => {
                 }
 
                 <Button type="primary" style={{ width: '120px' }} onClick={async () => {
-                    await createAppointment({ createAppointmentDto: { date: `${appointmentDate}.000Z`, doctorId: Number(doctorId), userId: 1 } });
+                    //@ts-ignore
+                    await createAppointment({ createAppointmentDto: { date: `${appointmentDate}.000Z`, doctorId: Number(doctorId), userId: account.user.id } });
                     refetch();
                 }}>Записаться</Button>
             </Flex>

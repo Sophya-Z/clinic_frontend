@@ -13,6 +13,8 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     const [signIn, result ] = useAuthControllerSignInMutation({fixedCacheKey: 'shared-update-post'})
 
+    //@ts-ignore
+    localStorage.setItem('token', result?.data?.access_token)
 
     console.log(result)
 

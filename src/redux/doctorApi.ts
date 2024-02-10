@@ -150,7 +150,7 @@ export type AuthControllerSignInApiResponse = unknown;
 export type AuthControllerSignInApiArg = {
   signInDto: SignInDto;
 };
-export type AuthControllerGetProfileApiResponse = /** status 200  */ User;
+export type AuthControllerGetProfileApiResponse = /** status 200  */ Account;
 export type AuthControllerGetProfileApiArg = void;
 export type AdminsControllerCreateApiResponse = /** status 200  */ Admin;
 export type AdminsControllerCreateApiArg = {
@@ -263,12 +263,29 @@ export type AddTimeSlotsDto = {
   timeSlots: string[];
 };
 export type Appointment = {};
-export type CreateAppointmentDto = {};
+export type CreateAppointmentDto = {
+  /** Дата посещения */
+  date: string;
+  /** Доктор Id */
+  doctorId: number;
+  /** Пользователь Id */
+  userId: number;
+};
 export type SignInDto = {
   /** Адрес электронной почты */
   email: string;
   /** Пароль */
   password: string;
+};
+export type Account = {
+  /** id */
+  id: number;
+  /** Адрес электронной почты */
+  email: string;
+  /** Пароль */
+  password: string;
+  /** Роль пользователя */
+  role: string[];
 };
 export type Admin = {
   /** id */
