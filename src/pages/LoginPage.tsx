@@ -44,15 +44,15 @@ const FormLogin = () => {
                 fontWeight: 500,
                 fontStyle: 'normal',
                 fontSize: '16px',
-                padding: '120px 0px 0px 300px',
+                margin: "0 auto",
+                marginTop: "300px",
                 display: 'flex',
-                flexWrap: 'nowrap',
                 justifyContent: 'center',
             }}
                 onFinish={onFinish}
                 autoComplete="off">
                 <div>
-                    <h1 >Авторизация</h1>
+                    <h1 style={{textAlign: "center"}}>Авторизация</h1>
                     <Form.Item
                         name={EMAIL_NAME}
                         rules={[{ required: true, message: 'Введите email' },

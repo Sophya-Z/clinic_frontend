@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Flex } from "antd";
 import { useEffect, useMemo } from "react";
-import { APPOINTMENT_PATH, DOCTOR_PATH, REGISTER_PATH } from "../routing/layouts/constants";
+import { APPOINTMENT_PATH, DOCTOR_PATH, REGISTER_PATH, TIMESLOTS_MANAGEMENT } from "../routing/layouts/constants";
 import { useAuthControllerSignInMutation, useDoctorsControllerGetAllQuery } from "../redux/doctorApi";
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import React from 'react';
@@ -57,47 +57,46 @@ const Doctors = () => {
     //     <>{post.map(doctor => <div>{doctor.name}</div>)}
     //     </>
     return (
-        <List
-            itemLayout="vertical"
-            size="large"
-            pagination={{
-                onChange: (page) => {
-                    console.log(page);
-                },
-                pageSize: 3,
-            }}
-            dataSource={post}
-            footer={
-                <div>
-                    <b>ant design</b> footer part
-                </div>
-            }
-            renderItem={(item) => (
-                <List.Item
-                    key={item.id}
-                    actions={[
-                        <Button onClick={()=>navigate(APPOINTMENT_PATH)}>Выбрать</Button>,
-                        // <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                        // <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-                    ]}
-                    extra={
-                        <img
-                            width={272}
-                            alt="logo"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                        />
-                    }
-                >
-                    {/* <List.Item.Meta
+        <Flex vertical={true} style={{width: '1200px', margin: '0 auto', marginTop:'120px'}}>
+            <List
+                itemLayout="vertical"
+                size="large"
+                pagination={{
+                    onChange: (page) => {
+                        console.log(page);
+                    },
+                    pageSize: 10,
+                }}
+                dataSource={post}
+                footer={null}
+                renderItem={(item) => (
+                    <List.Item
+                        key={item.id}
+                        actions={[
+                            <Button onClick={() => navigate(APPOINTMENT_PATH.replace(':doctorId', item.id.toString()))}>Выбрать</Button>,
+                            <Button onClick={() => navigate(TIMESLOTS_MANAGEMENT.replace(':doctorId', item.id.toString()))}>Тайм слоты</Button>,
+                            // <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
+                            // <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                        ]}
+                        extra={
+                            <img
+                                width={272}
+                                alt="logo"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                            />
+                        }
+                    >
+                        {/* <List.Item.Meta
                         avatar={<Avatar src={item.avatar} />}
                         title={<a href={item.href}>{item.title}</a>}
                         description={item.description}
                     /> */}
-                    {item.surname} {item.name} {item.patronymic}
-                    <div>Врач-офтальмолог</div>
-                </List.Item>
-            )}
-        />
+                        {item.surname} {item.name} {item.patronymic}
+                        <div>Врач-офтальмолог</div>
+                    </List.Item>
+                )}
+            />
+        </Flex>
     )
 }
 

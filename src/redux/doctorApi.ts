@@ -1,4 +1,4 @@
-import { emptySplitApi as api } from "./emptyAPI";
+import { emptySplitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     usersControllerCreate: build.mutation<
@@ -33,6 +33,12 @@ const injectedRtkApi = api.injectEndpoints({
     >({
       query: () => ({ url: `/doctors` }),
     }),
+    doctorsControllerGetById: build.query<
+      DoctorsControllerGetByIdApiResponse,
+      DoctorsControllerGetByIdApiArg
+    >({
+      query: (queryArg) => ({ url: `/doctors/${queryArg.id}` }),
+    }),
     doctorsControllerAddTimeSlots: build.mutation<
       DoctorsControllerAddTimeSlotsApiResponse,
       DoctorsControllerAddTimeSlotsApiArg
@@ -43,14 +49,13 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.addTimeSlotsDto,
       }),
     }),
-    doctorsControllerGetAvailableDates: build.mutation<
+    doctorsControllerGetAvailableDates: build.query<
       DoctorsControllerGetAvailableDatesApiResponse,
       DoctorsControllerGetAvailableDatesApiArg
     >({
       query: (queryArg) => ({
-        url: `/doctors/get-avaliable-dates`,
-        method: "POST",
-        body: queryArg.getAvaliableDatesDto,
+        url: `/doctors/${queryArg.id}/avaliable-dates`,
+        params: { startDate: queryArg.startDate, endDate: queryArg.endDate },
       }),
     }),
     appointmentsControllerCreate: build.mutation<
@@ -117,6 +122,10 @@ export type DoctorsControllerCreateApiArg = {
 };
 export type DoctorsControllerGetAllApiResponse = /** status 200  */ Doctor[];
 export type DoctorsControllerGetAllApiArg = void;
+export type DoctorsControllerGetByIdApiResponse = /** status 200  */ Doctor;
+export type DoctorsControllerGetByIdApiArg = {
+  id: number;
+};
 export type DoctorsControllerAddTimeSlotsApiResponse =
   /** status 200  */ Doctor[];
 export type DoctorsControllerAddTimeSlotsApiArg = {
@@ -125,7 +134,9 @@ export type DoctorsControllerAddTimeSlotsApiArg = {
 export type DoctorsControllerGetAvailableDatesApiResponse =
   /** status 200  */ Doctor[];
 export type DoctorsControllerGetAvailableDatesApiArg = {
-  getAvaliableDatesDto: GetAvaliableDatesDto;
+  id: number;
+  startDate: string;
+  endDate: string;
 };
 export type AppointmentsControllerCreateApiResponse =
   /** status 200  */ Appointment;
@@ -251,14 +262,6 @@ export type AddTimeSlotsDto = {
   /** Доктор ID */
   timeSlots: string[];
 };
-export type GetAvaliableDatesDto = {
-  /** Доктор ID */
-  id: number;
-  /** Доктор ID */
-  startDate: string;
-  /** Доктор ID */
-  endDate: string;
-};
 export type Appointment = {};
 export type CreateAppointmentDto = {};
 export type SignInDto = {
@@ -302,8 +305,9 @@ export const {
   useUsersControllerGetAllQuery,
   useDoctorsControllerCreateMutation,
   useDoctorsControllerGetAllQuery,
+  useDoctorsControllerGetByIdQuery,
   useDoctorsControllerAddTimeSlotsMutation,
-  useDoctorsControllerGetAvailableDatesMutation,
+  useDoctorsControllerGetAvailableDatesQuery,
   useAppointmentsControllerCreateMutation,
   useAppointmentsControllerGetAllQuery,
   useAuthControllerSignInMutation,

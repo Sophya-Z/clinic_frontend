@@ -13,6 +13,9 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     const [signIn, result ] = useAuthControllerSignInMutation({fixedCacheKey: 'shared-update-post'})
 
+
+    console.log(result)
+
     // const isAuth = useAppSelector(viewerSelectors.selectIsAuth);
     const isAuth = useMemo(() => result.data != null, [result.data]);
 

@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { Form, Input, Button, Card, Flex, Radio, notification } from "antd";
+import { Form, Input, Button, Card, Flex, Radio, notification, TimePicker } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { useAppointmentsControllerCreateMutation, useAuthControllerSignInMutation, useDoctorsControllerGetAllQuery, useDoctorsControllerGetAvailableDatesQuery, useDoctorsControllerGetByIdQuery } from "../redux/doctorApi";
-import { LeftOutlined, LikeOutlined, MessageOutlined, RightOutlined, StarOutlined } from '@ant-design/icons';
+import { LeftOutlined, LikeOutlined, MessageOutlined, PlusCircleOutlined, RightOutlined, StarOutlined } from '@ant-design/icons';
 import moment from "moment";
 import 'moment/locale/ru';
 
@@ -14,13 +14,22 @@ interface LoginFormState {
     [PASSWORD_NAME]: string
 }
 
-const Appointment = () => {
+const TimeSlotsManagement = () => {
     const { doctorId } = useParams();
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const [api, contextHolder] = notification.useNotification();
+
+    const [timeSlots, setTimeSLots] = useState({
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+    })
 
     const [appointmentDate, setAppointmentDate] = useState<string>(Date.now().toString());
     const [dateOffset, setDateOffset] = useState<number>(0);
@@ -59,6 +68,19 @@ const Appointment = () => {
                     <Button icon={<RightOutlined onClick={() => setDateOffset(prev => prev += 6)} />} />
                 </p>
 
+                {//@ts-ignore
+                    Object.keys(timeSlots).map((timeSlot, s) => <Flex>
+                        <p>{timeSlot}</p>
+                        <Flex gap={"10px"}>
+                            {//@ts-ignore
+                                timeSlots[timeSlot].map(time => <div>{moment(time).format('hh:mm')}</div>)
+                            }
+                           <TimePicker   showNow={false} format={'HH:mm'} hideDisabledOptions minuteStep={15} disabledTime={() => {return {disabledHours: () => [0, 1, 2, 3, 4, 5, 6, 7, 20, 21, 22, 23, 24]};
+                           }}></TimePicker>
+                        </Flex>
+                    </Flex>)
+                }
+
                 {//@ts-ignore 
                     Object.entries(schedule).map((d, t) => <Radio.Group value={appointmentDate} onChange={(e) => setAppointmentDate(e.target.value)}>
                         <Flex>
@@ -82,4 +104,4 @@ const Appointment = () => {
     )
 }
 
-export default Appointment;
+export default TimeSlotsManagement;

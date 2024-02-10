@@ -55,7 +55,7 @@ const FormRegistration = () => {
         //     password: values[PASSWORD_NAME]
         // }));
         console.log(values);
-        
+
         signIn({
             createUserDto: {
                 surname: values[SURNAME],
@@ -96,106 +96,107 @@ const FormRegistration = () => {
                 fontWeight: 500,
                 fontStyle: 'normal',
                 fontSize: '16px',
-                padding: '0px 0px 0px 300px',
+                margin: "0 auto",
+                marginTop: "300px",
+                marginBottom: "300px",
                 display: 'flex',
-                flexWrap: 'nowrap',
                 justifyContent: 'center',
             }}
                 onFinish={onFinish}
                 autoComplete="off">
                 <div style={{
-                width: '600px',
-            }}>
-                    <h1 >Регистрация</h1>
+                    width: '600px',
+                }}>
+                    <h1 style={{ textAlign: "center" }}>Регистрация</h1>
                     <div>
                         <Form.Item
                             name={SURNAME}
                             rules={[{ required: true, message: 'Фамилия' }]}
                         >
-                            <Input placeholder="surname" />
+                            <Input placeholder="Фамилия" />
                         </Form.Item>
                         <Form.Item
                             name={NAME}
                             rules={[{ required: true, message: 'Имя' }]}
                         >
-                            <Input placeholder="name" />
+                            <Input placeholder="Имя" />
                         </Form.Item>
                         <Form.Item
                             name={PATRONYMIC}
                             rules={[{ required: true, message: 'Отчество' }]}
                         >
-                            <Input placeholder="patronymic" />
+                            <Input placeholder="Отчество" />
                         </Form.Item>
                         <Form.Item
                             name={BIRTHDAY}
                             rules={[{ required: true, message: 'Дата рождения' }]}
                         >
                             <DatePicker style={{
-                width: '600px',
-            }}placeholder="birthday" />
+                                width: '600px',
+                            }} placeholder="Дата рождения" />
                         </Form.Item>
                         <Form.Item
                             name={PASSPORT_SERIES}
                             rules={[{ required: true, message: 'Серия паспорта' }]}
                         >
-                            <Input placeholder="passportSeries" />
+                            <Input placeholder="Серия паспорта" />
                         </Form.Item>
                         <Form.Item
                             name={PASSPORT_NUMBER}
                             rules={[{ required: true, message: 'Номер паспорта' }]}
                         >
-                            <Input placeholder="passportNumber" />
+                            <Input placeholder="Номер паспорта" />
                         </Form.Item>
                         <Form.Item
                             name={PASSPORT_BEEN_USED}
                             rules={[{ required: true, message: 'Выдан' }]}
                         >
-                            <Input placeholder="passportBeenUsed" />
+                            <Input placeholder="Выдан" />
                         </Form.Item>
                         <Form.Item
                             name={DEPARTMENT_CODE}
                             rules={[{ required: true, message: 'Код учреждения' }]}
                         >
-                            <Input placeholder="departmentCode" />
+                            <Input placeholder="Код учреждения" />
                         </Form.Item>
                         <Form.Item
                             name={DATE_ISSUE}
                             rules={[{ required: true, message: 'Дата выдачи' }]}
                         >
                             <DatePicker style={{
-                width: '600px',
-            }}placeholder="dateIssue" />
+                                width: '600px',
+                            }} placeholder="Дата выдачи" />
                         </Form.Item>
                         <Form.Item
                             name={SNILS}
                             rules={[{ required: true, message: 'СНИЛС' }]}
                         >
-                            <Input placeholder="snils" />
+                            <Input placeholder="СНИЛС" />
                         </Form.Item>
                         <Form.Item
                             name={INN}
                             rules={[{ required: true, message: 'ИНН' }]}
                         >
-                            <Input placeholder="inn" />
+                            <Input placeholder="ИНН" />
                         </Form.Item>
                         <Form.Item
                             name={RESIDENTIAL_ADDRESS}
                             rules={[{ required: true, message: 'Адрес проживания' }]}
                         >
-                            <Input placeholder="residentialAddress" />
+                            <Input placeholder="Адрес проживания" />
                         </Form.Item>
                         <Form.Item
                             name={PHONE_NUMBER}
                             rules={[{ required: true, message: 'Номер телефона' }]}
                         >
-                            <Input placeholder="phoneNumber" />
+                            <Input placeholder="Номер телефона" />
                         </Form.Item>
                         <Form.Item
                             name={EMAIL_NAME}
                             rules={[{ required: true, message: 'email' },
                             { type: 'email', message: 'Неверный формат email' }]}
                         >
-                            <Input placeholder="Email" />
+                            <Input placeholder="E-mail" />
                         </Form.Item>
                         <Form.Item
                             name={PASSWORD_NAME}

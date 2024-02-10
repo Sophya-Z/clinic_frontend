@@ -111,6 +111,37 @@
                 ]
             }
         },
+        "/doctors/{id}": {
+            "get": {
+                "operationId": "DoctorsController_getById",
+                "summary": "Получить доктора по id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Doctor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Доктор"
+                ]
+            }
+        },
         "/doctors/add-time-slots": {
             "post": {
                 "operationId": "DoctorsController_addTimeSlots",
@@ -146,21 +177,38 @@
                 ]
             }
         },
-        "/doctors/get-avaliable-dates": {
-            "post": {
+        "/doctors/{id}/avaliable-dates": {
+            "get": {
                 "operationId": "DoctorsController_getAvailableDates",
                 "summary": "Получение доступных дат для записи",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/GetAvaliableDatesDto"
-                            }
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "startDate",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "endDate",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -682,33 +730,6 @@
                 "required": [
                     "id",
                     "timeSlots"
-                ]
-            },
-            "GetAvaliableDatesDto": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "number",
-                        "example": 1,
-                        "description": "Доктор ID"
-                    },
-                    "startDate": {
-                        "format": "date-time",
-                        "type": "string",
-                        "example": 1,
-                        "description": "Доктор ID"
-                    },
-                    "endDate": {
-                        "format": "date-time",
-                        "type": "string",
-                        "example": 1,
-                        "description": "Доктор ID"
-                    }
-                },
-                "required": [
-                    "id",
-                    "startDate",
-                    "endDate"
                 ]
             },
             "CreateAppointmentDto": {
